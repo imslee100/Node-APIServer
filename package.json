@@ -1,0 +1,24 @@
+{
+  "name": "node_tdd",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "start":"node app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/imslee100/Node-APIServer.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/imslee100/Node-APIServer/issues"
+  },
+  "homepage": "https://github.com/imslee100/Node-APIServer#readme",
+  "description": "",
+  "dependencies": {
+    "express": "^4.17.2",
+    "morgan": "^1.10.0"
+  }
+}
