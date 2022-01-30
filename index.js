@@ -1,25 +1,16 @@
-const http = require('http')
+const express = require('express')
+const app = express()
+const morgan = require('morgan')
+const bodyParser = require('body-parser')
+const user = require('./api/user')
 
-const hostname = '127.0.0.1'
-const port = 3000
+if (process.env.NODE_ENV !== 'test') {
+    app.use(morgan('dev'))
+}
 
-const server = http.createServer((req,res) => {
+app.use(bodyParser.json())
+app.use(bodyParser.urlencoded({ extended: true }))
 
-    if(req.url === '/'){
-        res.statusCode = 200
-        res.setHeader('Content-Type','text/plain')
-        res.end('Hello World\n')
-    } else if(req.url === '/users') {
-        res.statusCode = 200
-        res.setHeader('Content-Type', 'text/plain')
-        res.end('User list')
-    } else {
-        res.statusCode = 404
-        res.end('Not Found')
-    }
+app.use('/users',user)
 
-});
-
-server.listen(port, hostname, () => {
-    console.log(`Server runnig at http://${hostname}:${port}/`);
-});
+module.exports = app;
