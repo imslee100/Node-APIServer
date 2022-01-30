@@ -1,5 +1,6 @@
 const express = require('express')
 const morgan = require('morgan')
+const bodyParser = require('body-parser')
 let users = require('./db/users')
 const app = express()
 
@@ -10,6 +11,8 @@ function logger(req, res, next){
 
 app.use(logger)
 app.use(morgan('dev'))
+app.use(bodyParser.json())
+app.use(bodyParser.urlencoded({ extend: true }))
 
 app.listen(3000, function(){
     // console.log('Server is running')
@@ -41,6 +44,19 @@ app.delete('/users/:id', (req, res) => {
   
     users = users.filter(user=> user.id !== id);
     res.status(204).end();
-  });
+});
+
+app.post('/users', (req,res) => {
+    const name = req.body.name
+    if(!name) return res.status(400).end()
+
+    const isConflict = users.filter(user => user.name === name).length
+    if(isConflict) return res.status(409).end()
+    
+    const id = Date.now()
+    const user = {id, name}
+    users.push(user)
+    res.status(201).json(user)
+})
 
 module.exports = app;
