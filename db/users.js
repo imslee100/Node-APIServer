@@ -5,4 +5,4 @@ const users = [
     {id:4, name:'tom'},
 ]
 
-exports.modules = users
+module.exports = users
