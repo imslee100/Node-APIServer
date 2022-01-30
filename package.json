@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
+    "test": "mocha tdd/supertest/app.spec.js",
     "start": "node app.js"
   },
   "repository": {
