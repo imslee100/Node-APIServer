@@ -18,3 +18,5 @@ app.listen(3000, function(){
 app.get('/users', function(req, res){
     res.json(users)
 })
+
+module.exports = app;
